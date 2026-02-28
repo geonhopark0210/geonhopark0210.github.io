@@ -1,0 +1,49 @@
+title: "Geonho Park | 박건호"
+description: "임상/상담심리학 × AI | 학습 노트 & 연구 기록"
+url: "https://geonhopark0210.github.io"
+baseurl: ""
+
+author:
+  name: Geonho Park
+  email: ""
+
+theme: minima
+
+# Build settings
+markdown: kramdown
+highlighter: rouge
+permalink: pretty
+
+# Plugins
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+
+# Navigation
+header_pages:
+  - about.md
+  - study/index.md
+  - research/index.md
+  - projects/index.md
+
+# Exclude from build
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - .venv
+  - __pycache__
+  - "*.py"
+  - .env
+  - .DS_Store
+
+# Defaults
+defaults:
+  - scope:
+      path: "study"
+    values:
+      layout: post
+  - scope:
+      path: "research"
+    values:
+      layout: post
