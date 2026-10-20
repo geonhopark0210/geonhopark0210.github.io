@@ -1,0 +1,540 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>8주차 발제 구성 제안</title>
+<style>
+  :root {
+    --bg: #f6f7fb;
+    --card: #ffffff;
+    --ink: #1a1d27;
+    --muted: #5d6475;
+    --line: #e3e6ee;
+    --accent: #3b4a9e;
+    --accent-soft: #e8ebf8;
+    --danger: #c0563f;
+
+    --g-common: #8b93a3;
+    --g-intro: #4f5fb3;
+    --g-mem: #2a8a8a;
+    --g-keep: #c0563f;
+    --g-ext: #6f7f99;
+    --g-tx: #3f8f5b;
+    --g-sup: #8a6bb0;
+
+    --radius: 14px;
+    --fs-body: clamp(15px, 0.9vw + 11px, 17px);
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: "Pretendard", "Apple SD Gothic Neo", "Noto Sans KR", system-ui, sans-serif;
+    font-size: var(--fs-body);
+    line-height: 1.65;
+    word-break: keep-all;
+  }
+  .wrap { max-width: 1040px; margin: 0 auto; padding: 0 16px 80px; }
+
+  header { padding: 48px 0 28px; }
+  .eyebrow { font-size: 13px; letter-spacing: .08em; color: var(--accent); font-weight: 600; }
+  h1 { font-size: clamp(26px, 3.4vw + 12px, 40px); line-height: 1.25; margin: 8px 0 10px; letter-spacing: -.01em; }
+  .sub { color: var(--muted); margin: 0; }
+  .meta { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+  .chip {
+    font-size: 13px; padding: 4px 10px; border-radius: 999px;
+    background: var(--card); border: 1px solid var(--line); color: var(--muted);
+  }
+
+  section { margin-top: 44px; }
+  .sec-no { font-size: 13px; font-weight: 700; color: var(--accent); letter-spacing: .06em; }
+  h2 { font-size: clamp(20px, 1.6vw + 14px, 26px); margin: 4px 0 6px; line-height: 1.35; }
+  .lead { color: var(--muted); margin: 0 0 18px; }
+
+  .card {
+    background: var(--card); border: 1px solid var(--line);
+    border-radius: var(--radius); padding: clamp(16px, 2.4vw, 26px);
+  }
+
+  /* 1. 결론 */
+  .thesis { font-size: clamp(18px, 1.4vw + 12px, 23px); line-height: 1.6; font-weight: 600; margin: 0; }
+  .thesis em { font-style: normal; color: var(--accent); }
+  .thesis-note { margin: 12px 0 0; color: var(--muted); font-size: 14px; }
+
+  /* 2. 흐름 척추 */
+  .spine { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  .spine-step { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 16px 18px; position: relative; }
+  .spine-step .en { font-size: 12px; font-weight: 700; letter-spacing: .08em; color: var(--accent); }
+  .spine-step h3 { margin: 4px 0 6px; font-size: 19px; }
+  .spine-step p { margin: 0; color: var(--muted); font-size: 14.5px; }
+  .spine-step .where { margin-top: 10px; font-size: 13px; color: var(--ink); }
+  .spine-step .where b { color: var(--accent); }
+  .spine-step:not(:last-child)::after {
+    content: "→"; position: absolute; right: -12px; top: 50%; transform: translateY(-50%);
+    width: 24px; text-align: center; color: var(--muted); background: var(--bg); z-index: 1; line-height: 1.4;
+  }
+  .flow-line { margin: 14px 0 0; color: var(--muted); font-size: 14.5px; }
+
+  /* 3. 모델 */
+  .model-grid { display: grid; grid-template-columns: 1.55fr 1fr; gap: 20px; align-items: start; }
+  .model-svg { width: 100%; height: auto; display: block; }
+  .model-svg text { font-family: inherit; }
+  .legend { list-style: none; margin: 0 0 14px; padding: 0; display: grid; gap: 8px; font-size: 14px; }
+  .legend li { display: flex; align-items: center; gap: 10px; }
+  .legend svg { flex: none; }
+  .talk { margin: 0; padding: 0; list-style: none; counter-reset: t; display: grid; gap: 10px; font-size: 14.5px; }
+  .talk li { counter-increment: t; padding-left: 34px; position: relative; }
+  .talk li::before {
+    content: counter(t); position: absolute; left: 0; top: 1px; width: 24px; height: 24px; border-radius: 50%;
+    background: var(--accent); color: #fff; font-size: 13px; font-weight: 700; display: grid; place-items: center;
+  }
+  .fine { font-size: 13px; color: var(--muted); margin: 12px 0 0; }
+
+  /* 4. 분담 */
+  .seg { display: inline-flex; flex-wrap: wrap; gap: 6px; padding: 5px; background: var(--card); border: 1px solid var(--line); border-radius: 12px; }
+  .seg button {
+    font: inherit; font-size: 14.5px; font-weight: 600; color: var(--muted);
+    background: transparent; border: 0; padding: 8px 16px; border-radius: 8px; cursor: pointer;
+  }
+  .seg button[aria-pressed="true"] { background: var(--accent); color: #fff; }
+  .seg button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .seg .tag { font-size: 11px; font-weight: 700; margin-left: 6px; padding: 1px 6px; border-radius: 999px; background: #fff3; }
+  .seg button[aria-pressed="false"] .tag { background: var(--accent-soft); color: var(--accent); }
+
+  .split-desc { margin: 14px 0 18px; }
+  .split-desc strong { font-size: 17px; }
+  .split-desc span { color: var(--muted); display: block; font-size: 14.5px; }
+
+  .tl-scroll { overflow-x: auto; padding-bottom: 6px; }
+  .tl { min-width: 680px; }
+  .tl-row { display: flex; }
+  .blk {
+    flex-grow: var(--m); flex-basis: 0; min-width: 0;
+    border-right: 2px solid var(--bg);
+    background: color-mix(in srgb, var(--c) 14%, #fff);
+    border-top: 4px solid var(--c);
+    padding: 8px 6px 7px; text-align: center; line-height: 1.25;
+  }
+  .blk:last-child { border-right: 0; }
+  .blk b { display: block; font-size: 13px; }
+  .blk i { display: block; font-style: normal; font-size: 11.5px; color: var(--muted); margin-top: 2px; }
+  .blk.edge-split { box-shadow: inset -3px 0 0 var(--ink); }
+
+  .tl-bands { margin-top: 8px; }
+  .band {
+    flex-grow: var(--m); flex-basis: 0; min-width: 0; text-align: center;
+    padding: 6px 4px; font-size: 13px; font-weight: 600; line-height: 1.3;
+    border-bottom: 4px solid var(--c); color: var(--ink);
+    background: color-mix(in srgb, var(--c) 10%, #fff);
+    border-right: 2px solid var(--bg);
+  }
+  .band:last-child { border-right: 0; }
+  .band small { display: block; font-weight: 500; color: var(--muted); font-size: 12px; }
+  .band.common { --c: var(--g-common); font-weight: 500; }
+  .band.first { --c: var(--accent); }
+  .band.second { --c: var(--g-tx); }
+
+  .tbl-wrap { overflow-x: auto; margin-top: 22px; }
+  table { width: 100%; border-collapse: collapse; min-width: 640px; font-size: 14.5px; background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; }
+  th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  th { font-size: 12.5px; color: var(--muted); font-weight: 600; background: #fafbfd; letter-spacing: .02em; }
+  td.id { font-weight: 700; white-space: nowrap; border-left: 4px solid var(--c); }
+  td.topic { white-space: nowrap; font-weight: 600; }
+  td.num { white-space: nowrap; color: var(--muted); }
+  tr.split-after td { border-bottom: 3px solid var(--ink); }
+  .half { font-size: 12px; font-weight: 700; padding: 2px 8px; border-radius: 999px; white-space: nowrap; }
+  .half.first { background: var(--accent-soft); color: var(--accent); }
+  .half.second { background: #e3f2e9; color: var(--g-tx); }
+  .half.common { background: #eef0f4; color: var(--muted); }
+
+  .note { margin-top: 14px; font-size: 14px; color: var(--muted); }
+
+  /* 5. 토론 */
+  .qs { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+  .q h3 { margin: 0 0 6px; font-size: 17px; }
+  .q .q-tag { font-size: 12px; font-weight: 700; color: var(--accent); letter-spacing: .06em; }
+  .q p { margin: 0 0 8px; font-size: 15px; }
+  .q .why { color: var(--muted); font-size: 13.5px; }
+  details { margin-top: 14px; }
+  summary { cursor: pointer; font-weight: 600; color: var(--accent); }
+  details ul { margin: 10px 0 0; padding-left: 20px; color: var(--muted); font-size: 14.5px; }
+
+  /* 6. 오늘 정할 것 */
+  .todo { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+  .todo li { display: grid; grid-template-columns: 28px 1fr; gap: 10px; align-items: start; padding: 14px 16px; background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); }
+  .todo .box { width: 22px; height: 22px; border: 2px solid var(--accent); border-radius: 6px; margin-top: 2px; }
+  .todo b { display: block; }
+  .todo span { color: var(--muted); font-size: 14.5px; }
+
+  footer { margin-top: 56px; color: var(--muted); font-size: 13px; border-top: 1px solid var(--line); padding-top: 16px; }
+
+  @media (max-width: 760px) {
+    .spine { grid-template-columns: 1fr; }
+    .spine-step:not(:last-child)::after { content: "↓"; right: auto; left: 50%; top: auto; bottom: -14px; transform: translateX(-50%); }
+    .model-grid { grid-template-columns: 1fr; }
+    .qs { grid-template-columns: 1fr; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; animation: none !important; scroll-behavior: auto !important; }
+  }
+  @media print {
+    body { background: #fff; }
+    .seg { display: none; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="eyebrow">정신병리학 · 8주차 논문 발제 · 구성 제안</div>
+  <h1>A cognitive model of PTSD,<br>이런 흐름으로 풀어보면 어떨까요?</h1>
+  <p class="sub">Ehlers, A., &amp; Clark, D. M. (2000). <em>Behaviour Research and Therapy, 38</em>(4), 319–345.</p>
+  <div class="meta">
+    <span class="chip">본문 약 16.7분 (20분 미만, 토론 별도)</span>
+    <span class="chip">슬라이드 15장 + 백업 2장</span>
+    <span class="chip">Canva로 함께 제작</span>
+    <span class="chip">미팅용 초안 · 2026-10-20</span>
+  </div>
+</header>
+
+<!-- 1 -->
+<section>
+  <div class="sec-no">01</div>
+  <h2>발제 전체를 관통하는 한 문장</h2>
+  <p class="lead">모든 슬라이드가 이 문장을 풀어 쓰는 방향으로 배치되어 있습니다.</p>
+  <div class="card">
+    <p class="thesis">PTSD는 외상을 <em>‘지금의 심각한 위협’</em>으로 처리할 때 지속된다. 그 위협은 ① 외상·후유증에 대한 <em>부정적 평가</em>와 ② 정교화되지 못한 <em>외상 기억</em>에서 나오고, <em>통제 전략</em>이 두 가지의 변화를 막아 유지된다.</p>
+    <p class="thesis-note">논문 초록의 구조를 그대로 따른 요약입니다. 원문은 이 모델을 발병이 아니라 <b>지속(persistence)</b>의 모델로 제시합니다.</p>
+  </div>
+</section>
+
+<!-- 2 -->
+<section>
+  <div class="sec-no">02</div>
+  <h2>이야기의 뼈대: 평가 → 기억 → 통제</h2>
+  <p class="lead">세 단계를 순서대로 밟고, 마지막에 치료로 되돌아오는 구조입니다.</p>
+  <div class="spine">
+    <div class="spine-step">
+      <div class="en">APPRAISE</div>
+      <h3>평가</h3>
+      <p>외상과 후유증을 어떻게 해석하느냐가 위협감과 정서를 결정합니다.</p>
+      <div class="where"><b>S5</b> · Table 1, 평가-정서 대응</div>
+    </div>
+    <div class="spine-step">
+      <div class="en">REMEMBER</div>
+      <h3>기억</h3>
+      <p>의도적 회상은 흩어져 있는데, 비자발적 재체험은 ‘지금’처럼 생생합니다.</p>
+      <div class="where"><b>S6–S8</b> · 침습의 역설, 세 기제, 평가와의 상호작용</div>
+    </div>
+    <div class="spine-step">
+      <div class="en">CONTROL</div>
+      <h3>통제 전략</h3>
+      <p>위협을 줄이려던 시도가 오히려 평가와 기억의 변화를 막습니다.</p>
+      <div class="where"><b>S9</b> · 유지 전략 → 이후 S12–S13 치료로 연결</div>
+    </div>
+  </div>
+  <p class="flow-line">앞에 <b>S3 퍼즐</b>(불안장애인데 문제는 과거 기억)과 <b>S4 모델 한 장</b>이 오고, 뒤에 <b>배경 요인·설명하는 현상·치료·경험적 지지와 한계</b>(S10–S14), 그리고 <b>토론 질문</b>(S15)이 이어집니다.</p>
+</section>
+
+<!-- 3 -->
+<section>
+  <div class="sec-no">03</div>
+  <h2>핵심 슬라이드: 모델 한 장 (Fig. 1 재구성)</h2>
+  <p class="lead">S4에서 한 번 설명하고, 이후 슬라이드 모서리에 이 그림을 작게 넣어 “지금 어디를 보는지” 표시하는 방식을 제안합니다.</p>
+  <div class="card">
+    <div class="model-grid">
+      <svg class="model-svg" viewBox="0 0 760 412" role="img" aria-label="Ehlers와 Clark의 PTSD 인지모델 도식: 배경 요인과 외상 당시 처리가 외상 기억과 부정적 평가에 영향을 주고, 두 요소가 현재 위협을 만들며, 통제 전략이 현재 위협과 서로 영향을 주고 기억과 평가의 변화를 막는다">
+        <defs>
+          <marker id="mSolid" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="#1a1d27"/>
+          </marker>
+          <marker id="mOpen" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+            <path d="M1,1 L9,5 L1,9 z" fill="#fff" stroke="#1a1d27" stroke-width="1.4"/>
+          </marker>
+          <marker id="mRed" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="#c0563f"/>
+          </marker>
+        </defs>
+
+        <!-- 회색 노드 -->
+        <rect x="40" y="14" width="200" height="54" rx="10" fill="#eef0f4" stroke="#c9cedb"/>
+        <text x="140" y="38" text-anchor="middle" font-size="15" font-weight="600" fill="#5d6475">배경 요인</text>
+        <text x="140" y="56" text-anchor="middle" font-size="11.5" fill="#5d6475">외상 특성 · 이전 경험 · 신념 · 현재 상태</text>
+
+        <rect x="320" y="14" width="200" height="54" rx="10" fill="#eef0f4" stroke="#c9cedb"/>
+        <text x="420" y="38" text-anchor="middle" font-size="15" font-weight="600" fill="#5d6475">외상 당시 인지처리</text>
+        <text x="420" y="56" text-anchor="middle" font-size="11.5" fill="#5d6475">mental defeat · 개념적/자료 주도적</text>
+
+        <line x1="242" y1="41" x2="316" y2="41" stroke="#1a1d27" stroke-width="2" marker-end="url(#mOpen)"/>
+        <!-- 외상 당시 처리 -> 컨테이너 -->
+        <line x1="420" y1="70" x2="420" y2="104" stroke="#1a1d27" stroke-width="2" marker-end="url(#mOpen)"/>
+
+        <!-- 지속되는 PTSD 컨테이너 -->
+        <rect x="40" y="108" width="680" height="292" rx="16" fill="#fbfbfd" stroke="#aeb5c7" stroke-dasharray="6 5"/>
+        <text x="60" y="130" font-size="12" font-weight="700" fill="#8b93a3" letter-spacing="1">PERSISTENT PTSD</text>
+
+        <!-- 기억 / 평가 -->
+        <rect x="80" y="144" width="190" height="56" rx="10" fill="#e1f0f0" stroke="#2a8a8a" stroke-width="1.6"/>
+        <text x="175" y="168" text-anchor="middle" font-size="15.5" font-weight="700" fill="#17595a">외상 기억</text>
+        <text x="175" y="187" text-anchor="middle" font-size="11.5" fill="#17595a">정교화 부족 · 강한 연합 · 프라이밍</text>
+
+        <rect x="490" y="144" width="190" height="56" rx="10" fill="#e1f0f0" stroke="#2a8a8a" stroke-width="1.6"/>
+        <text x="585" y="168" text-anchor="middle" font-size="15.5" font-weight="700" fill="#17595a">부정적 평가</text>
+        <text x="585" y="187" text-anchor="middle" font-size="11.5" fill="#17595a">외상 및 후유증에 대한 해석</text>
+
+        <line x1="274" y1="172" x2="486" y2="172" stroke="#1a1d27" stroke-width="2" marker-start="url(#mOpen)" marker-end="url(#mOpen)"/>
+
+        <!-- 현재 위협 -->
+        <rect x="265" y="230" width="230" height="60" rx="12" fill="#fdecdf" stroke="#c0563f" stroke-width="1.8"/>
+        <text x="380" y="255" text-anchor="middle" font-size="17" font-weight="800" fill="#8a3a28">현재 위협</text>
+        <text x="380" y="276" text-anchor="middle" font-size="12" fill="#8a3a28">침습 · 각성 증상 · 강한 정서</text>
+
+        <line x1="205" y1="203" x2="318" y2="228" stroke="#1a1d27" stroke-width="2.4" marker-end="url(#mSolid)"/>
+        <text x="150" y="226" font-size="11.5" fill="#5d6475">촉발단서</text>
+        <line x1="555" y1="203" x2="442" y2="228" stroke="#1a1d27" stroke-width="2.4" marker-end="url(#mSolid)"/>
+
+        <!-- 통제 전략 -->
+        <rect x="265" y="338" width="230" height="44" rx="10" fill="#f8e6e1" stroke="#c0563f" stroke-width="1.6"/>
+        <text x="380" y="365" text-anchor="middle" font-size="15.5" font-weight="700" fill="#8a3a28">통제 전략</text>
+        <line x1="380" y1="292" x2="380" y2="335" stroke="#1a1d27" stroke-width="2.4" marker-start="url(#mSolid)" marker-end="url(#mSolid)"/>
+
+        <!-- 변화를 막음 (빨간 점선) -->
+        <path d="M263,360 H125 V204" fill="none" stroke="#c0563f" stroke-width="2.2" stroke-dasharray="7 5" marker-end="url(#mRed)"/>
+        <path d="M497,360 H635 V204" fill="none" stroke="#c0563f" stroke-width="2.2" stroke-dasharray="7 5" marker-end="url(#mRed)"/>
+        <text x="112" y="296" font-size="12" font-weight="700" fill="#c0563f" text-anchor="end">변화를</text>
+        <text x="112" y="312" font-size="12" font-weight="700" fill="#c0563f" text-anchor="end">막음</text>
+        <text x="648" y="296" font-size="12" font-weight="700" fill="#c0563f">변화를</text>
+        <text x="648" y="312" font-size="12" font-weight="700" fill="#c0563f">막음</text>
+
+        <!-- 번호 배지 -->
+        <g font-size="13" font-weight="700" fill="#fff" text-anchor="middle">
+          <circle cx="80" cy="144" r="12" fill="#3b4a9e"/><text x="80" y="149">1</text>
+          <circle cx="490" cy="144" r="12" fill="#3b4a9e"/><text x="490" y="149">1</text>
+          <circle cx="495" cy="230" r="12" fill="#3b4a9e"/><text x="495" y="235">2</text>
+          <circle cx="265" cy="338" r="12" fill="#3b4a9e"/><text x="265" y="343">3</text>
+        </g>
+      </svg>
+
+      <div>
+        <ul class="legend" aria-label="화살표 범례">
+          <li><svg width="44" height="14"><line x1="2" y1="7" x2="36" y2="7" stroke="#1a1d27" stroke-width="2.4" marker-end="url(#mSolid)"/></svg>유발 <span style="color:var(--muted)">leads to</span></li>
+          <li><svg width="44" height="14"><line x1="2" y1="7" x2="36" y2="7" stroke="#1a1d27" stroke-width="2" marker-end="url(#mOpen)"/></svg>영향 <span style="color:var(--muted)">influences</span></li>
+          <li><svg width="44" height="14"><line x1="2" y1="7" x2="36" y2="7" stroke="#c0563f" stroke-width="2.2" stroke-dasharray="6 4" marker-end="url(#mRed)"/></svg>변화를 막음 <span style="color:var(--muted)">prevents change in</span></li>
+        </ul>
+        <ol class="talk">
+          <li><b>두 입력</b>: 외상 기억과 부정적 평가가 서로 영향을 주며 현재 위협의 재료가 됩니다.</li>
+          <li><b>출력</b>: 현재 위협이 침습, 각성, 강한 정서로 나타납니다.</li>
+          <li><b>피드백</b>: 위협을 줄이려는 통제 전략이 기억과 평가의 변화를 막아 문제를 유지합니다.</li>
+        </ol>
+        <p class="fine">회색 노드는 원문처럼 배경 요인으로, “필요조건도 충분조건도 아닌 예시”로만 다룹니다. 원문 Fig. 1에서 배경 요인과 통제 전략을 잇는 화살표 하나는 단순화를 위해 생략하고, 각주에 Adapted from Ehlers &amp; Clark (2000), Fig. 1로 표기합니다.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 4 -->
+<section>
+  <div class="sec-no">04</div>
+  <h2>시간 배분과 분담안</h2>
+  <p class="lead">경계를 어디에 두느냐에 따라 전반과 후반의 분량이 달라집니다. 버튼으로 세 가지 안을 비교해 보실 수 있습니다.</p>
+
+  <div class="seg" id="seg" role="group" aria-label="분담안 선택"></div>
+  <div class="split-desc" id="splitDesc"></div>
+
+  <div class="tl-scroll">
+    <div class="tl">
+      <div class="tl-row" id="tlBlocks"></div>
+      <div class="tl-row tl-bands" id="tlBands"></div>
+    </div>
+  </div>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead>
+        <tr><th>슬라이드</th><th>주제</th><th>한 문장 헤드라인</th><th>시간</th><th>원문 쪽수</th><th>구간</th></tr>
+      </thead>
+      <tbody id="tbody"></tbody>
+    </table>
+  </div>
+  <p class="note">표지·요약(S1–S2)과 토론 질문(S15)은 전반·후반 시간에서 제외했고, 두 분이 함께 진행하는 구간으로 두었습니다. 본문 합계는 16.7분입니다.</p>
+</section>
+
+<!-- 5 -->
+<section>
+  <div class="sec-no">05</div>
+  <h2>토론 질문 2개</h2>
+  <p class="lead">원문이 스스로 열어 둔 지점에서 뽑았습니다. 토론 시간은 발표 20분에 포함되지 않습니다.</p>
+  <div class="qs">
+    <div class="card q">
+      <div class="q-tag">QUESTION 1</div>
+      <h3>반추와 치료적 재체험의 차이</h3>
+      <p>환자들은 이미 외상을 계속 생각하고 말하는데도 나아지지 않는다(§2.5). 그런데 치료는 오히려 더 많이 생각하고 말하라고 한다(§3.2). 둘을 가르는 기준은 무엇일까요?</p>
+      <div class="why">원문의 단서: “방식의 차이.” 반추는 ‘what if’에 머물고, 재체험은 현재형으로 감각·정서·hot spots를 다룹니다.</div>
+    </div>
+    <div class="card q">
+      <div class="q-tag">QUESTION 2</div>
+      <h3>전략의 이중성</h3>
+      <p>원문은 지금까지의 대처 방식이 다른 가벼운 스트레스에는 도움이 되었을 수 있다고 합니다(§3.2). 회피와 억제는 언제 적응적이고, 언제 유지 요인이 될까요?</p>
+      <div class="why">원문은 명시적 기준을 주지 않아 열린 질문으로 둘 수 있습니다. 단서는 단기 위협 감소와 장기적인 인지 변화 차단의 대비입니다.</div>
+    </div>
+  </div>
+  <details>
+    <summary>예비 질문 2개</summary>
+    <ul>
+      <li><b>침습과 반추의 기제 구분</b>: 원문은 두 현상을 다른 기제로 가정하면서도 서로 유발할 수 있다고 인정합니다. 임상 평가에서 이 구분이 가능할까요?</li>
+      <li><b>타인 반응과 한국 맥락</b>: 타인의 반응이 평가를 바꿉니다(§1.2.2). “빨리 잊어라”는 위로가 흔한 한국 사회에서 이 요인은 어떻게 작동할까요?</li>
+    </ul>
+  </details>
+</section>
+
+<!-- 6 -->
+<section>
+  <div class="sec-no">06</div>
+  <h2>오늘 함께 정하고 싶은 것</h2>
+  <p class="lead">미팅에서 확인되면 바로 제작에 들어갈 수 있는 항목들입니다.</p>
+  <ul class="todo">
+    <li><div class="box"></div><div><b>분담 경계와 담당 구간</b><span>제안은 A′(S8/S9)입니다. 전반(S3–S8)과 후반(S9–S14) 중 각자 어느 쪽을 맡을지 정해 주시면 됩니다.</span></div></li>
+    <li><div class="box"></div><div><b>공동 진행 구간</b><span>S1–S2(표지·요약)와 S15(토론 질문)는 함께 진행하는 것으로 제안드립니다.</span></div></li>
+    <li><div class="box"></div><div><b>Canva 작업 방식</b><span>한 파일에서 슬라이드 단위로 나눠 작업하고, 공통 형식(밝은 배경, S4 번호 배지, 모서리 미니맵)을 먼저 맞추는 방식은 어떨까요?</span></div></li>
+    <li><div class="box"></div><div><b>사례 사용 원칙</b><span>자살, 성폭력과 관련된 원문 사례는 슬라이드에서 쓰지 않고, 구급대원·운전 사례 등 비폭력적 사례로 대체하는 것을 제안드립니다.</span></div></li>
+    <li><div class="box"></div><div><b>일정</b><span>초안 공유 시점과 함께 리허설할 날짜를 정해 두면 좋겠습니다.</span></div></li>
+  </ul>
+</section>
+
+<footer>
+  구성 초안입니다. 문장과 시간 배분은 논의 후 수정될 수 있습니다. 원문 표기는 슬라이드 제작 단계에서 다시 한 번 확인합니다.
+</footer>
+
+</div>
+
+<script>
+(function () {
+  var G = {
+    common: 'var(--g-common)', intro: 'var(--g-intro)', mem: 'var(--g-mem)',
+    keep: 'var(--g-keep)', ext: 'var(--g-ext)', tx: 'var(--g-tx)', sup: 'var(--g-sup)'
+  };
+
+  var slides = [
+    { id: 'S1–S2',  label: 'S1–2', topic: '표지·요약',        head: '위협으로 처리된 외상은 지속되고, 통제 전략이 그것을 유지한다', min: 1.0, pages: '초록',          g: 'common', common: true },
+    { id: 'S3',  topic: '퍼즐',              head: '불안은 미래 위협에 대한 평가인데, PTSD의 문제는 이미 일어난 사건의 기억이다', min: 1.0, pages: 'p.320',          g: 'intro' },
+    { id: 'S4',  topic: '모델 (Fig. 1)',     head: '평가와 기억이 현재 위협을 만들고, 통제 전략이 두 가지의 변화를 막는다',       min: 2.0, pages: 'pp.320–321',     g: 'intro' },
+    { id: 'S5',  topic: '평가',              head: '외상과 후유증을 어떻게 해석하느냐가 정서와 위협감을 결정한다',               min: 1.2, pages: 'pp.321–323',     g: 'mem' },
+    { id: 'S6',  topic: '기억 ① 침습의 역설', head: '의도적 회상은 흩어져 있는데, 비자발적 재체험은 지금 일어나는 것처럼 생생하다', min: 1.2, pages: 'p.324',          g: 'mem' },
+    { id: 'S7',  topic: '기억 ② 세 가지 기제', head: '정교화 부족, 강한 연합, 지각적 프라이밍이 침습을 만든다',                   min: 1.5, pages: 'pp.325–326',     g: 'mem' },
+    { id: 'S8',  topic: '기억 ③ 평가와의 상호작용', head: '평가는 회상을 편향시키고, 기억의 성질은 다시 평가를 강화한다',          min: 1.0, pages: 'pp.326–327',     g: 'mem' },
+    { id: 'S9',  topic: '유지 전략',          head: '증상을 통제하려는 전략이 증상을 만들고 평가와 기억의 변화를 막는다',         min: 1.3, pages: 'pp.327–330',     g: 'keep' },
+    { id: 'S10', topic: '외상 당시 처리·배경 요인', head: '외상 당시 어떻게 처리했는지가 이후 평가와 기억의 질을 정한다',         min: 0.8, pages: 'pp.331–333',     g: 'ext' },
+    { id: 'S11', topic: '설명하는 현상',      head: '같은 모델로 PTSD의 낯선 특징들이 설명된다',                                min: 1.2, pages: 'pp.333–335',     g: 'ext' },
+    { id: 'S12', topic: '치료 ① 표적과 시작', head: '변화의 표적은 기억 정교화, 평가 수정, 전략 중단 세 가지다',                  min: 1.2, pages: 'pp.335–337',     g: 'tx' },
+    { id: 'S13', topic: '치료 ② 재체험·노출·단서', head: '재체험, 실제상황 노출, 촉발단서 식별이 정교화와 변별을 돕는다',          min: 1.5, pages: 'pp.337–342',     g: 'tx' },
+    { id: 'S14', topic: '지지와 한계',        head: '핵심 명제는 예비적으로 지지되었으나 많은 부분이 검증 전이다',                min: 1.0, pages: 'p.342',          g: 'sup' },
+    { id: 'S15', topic: '토론 질문',          head: '같은 “생각하고 말하기”가 왜 어떤 때는 도움이 되고 어떤 때는 유지시키는가', min: 0.8, pages: '—',              g: 'common', common: true }
+  ];
+
+  // lastFirst: 전반의 마지막 슬라이드 id
+  var plans = {
+    A:  { name: 'A',  tag: '',      lastFirst: 'S9',  first: '모델·기억·유지 전략', second: '확장·현상·치료·지지',
+          note: '모델과 적용의 경계는 분명하지만 전반이 더 깁니다.' },
+    Ap: { name: 'A′', tag: '제안',   lastFirst: 'S8',  first: '모델·평가·기억',     second: '유지 전략·확장·치료·지지',
+          note: '분량이 거의 같고, “위협이 어떻게 만들어지나 / 어떻게 유지되고 어떻게 풀리나”로 나뉩니다.' },
+    B:  { name: 'B',  tag: '',      lastFirst: 'S11', first: '모델과 설명력',       second: '치료·지지',
+          note: '치료 파트를 한 분이 통째로 맡을 수 있지만 분량 차이가 큽니다.' }
+  };
+  var order = ['A', 'Ap', 'B'];
+  var current = 'Ap';
+
+  var idx = {};
+  slides.forEach(function (s, i) { idx[s.id] = i; });
+
+  function fmt(n) { return (Math.round(n * 10) / 10).toFixed(1); }
+
+  function half(s, plan) {
+    if (s.common) return 'common';
+    return idx[s.id] <= idx[plan.lastFirst] ? 'first' : 'second';
+  }
+
+  function render() {
+    var plan = plans[current];
+    var sumFirst = 0, sumSecond = 0, firstIds = [], secondIds = [];
+    slides.forEach(function (s) {
+      var h = half(s, plan);
+      if (h === 'first') { sumFirst += s.min; firstIds.push(s.id); }
+      if (h === 'second') { sumSecond += s.min; secondIds.push(s.id); }
+    });
+    var range = function (ids) { return ids[0] + '–' + ids[ids.length - 1]; };
+
+    // 버튼
+    var seg = document.getElementById('seg');
+    seg.innerHTML = '';
+    order.forEach(function (k) {
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.setAttribute('aria-pressed', k === current ? 'true' : 'false');
+      b.innerHTML = plans[k].name + '안' + (plans[k].tag ? '<span class="tag">' + plans[k].tag + '</span>' : '');
+      b.addEventListener('click', function () { current = k; render(); });
+      seg.appendChild(b);
+    });
+
+    // 설명
+    document.getElementById('splitDesc').innerHTML =
+      '<strong>전반 ' + range(firstIds) + ' · ' + fmt(sumFirst) + '분 &nbsp;/&nbsp; 후반 ' + range(secondIds) + ' · ' + fmt(sumSecond) + '분</strong>' +
+      '<span>' + plan.first + ' / ' + plan.second + ' · 차이 ' + fmt(Math.abs(sumFirst - sumSecond)) + '분. ' + plan.note + '</span>';
+
+    // 타임라인 블록
+    var blocks = document.getElementById('tlBlocks');
+    blocks.innerHTML = '';
+    slides.forEach(function (s) {
+      var d = document.createElement('div');
+      d.className = 'blk' + (s.id === plan.lastFirst ? ' edge-split' : '');
+      d.style.setProperty('--m', s.min);
+      d.style.setProperty('--c', G[s.g]);
+      d.innerHTML = '<b>' + (s.label || s.id) + '</b><i>' + fmt(s.min) + '</i>';
+      d.title = s.id + ' ' + s.topic + ' · ' + fmt(s.min) + '분';
+      blocks.appendChild(d);
+    });
+
+    // 밴드
+    var bands = document.getElementById('tlBands');
+    bands.innerHTML = '';
+    var commonStart = slides[0].min, commonEnd = slides[slides.length - 1].min;
+    var mk = function (cls, m, html) {
+      var d = document.createElement('div');
+      d.className = 'band ' + cls;
+      d.style.setProperty('--m', m);
+      d.innerHTML = html;
+      bands.appendChild(d);
+    };
+    mk('common', commonStart, '공동<small>' + fmt(commonStart) + '</small>');
+    mk('first', sumFirst, '전반 ' + range(firstIds) + '<small>' + fmt(sumFirst) + '분 · 담당 협의</small>');
+    mk('second', sumSecond, '후반 ' + range(secondIds) + '<small>' + fmt(sumSecond) + '분 · 담당 협의</small>');
+    mk('common', commonEnd, '공동<small>' + fmt(commonEnd) + '</small>');
+
+    // 표
+    var tbody = document.getElementById('tbody');
+    tbody.innerHTML = '';
+    var labels = { first: '전반', second: '후반', common: '공동' };
+    slides.forEach(function (s) {
+      var h = half(s, plan);
+      var tr = document.createElement('tr');
+      if (s.id === plan.lastFirst) tr.className = 'split-after';
+      tr.innerHTML =
+        '<td class="id" style="--c:' + G[s.g] + '">' + s.id + '</td>' +
+        '<td class="topic">' + s.topic + '</td>' +
+        '<td>' + s.head + '</td>' +
+        '<td class="num">' + fmt(s.min) + '분</td>' +
+        '<td class="num">' + s.pages + '</td>' +
+        '<td><span class="half ' + h + '">' + labels[h] + '</span></td>';
+      tbody.appendChild(tr);
+    });
+  }
+
+  render();
+})();
+</script>
+</body>
+</html>
